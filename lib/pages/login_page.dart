@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unused_field
 
 import 'package:flutter/material.dart';
 
@@ -58,7 +58,7 @@ class _LoginPage extends State<LoginPage> {
 
   Widget _loginForm() {
     return Container(
-      height: _deviceHeight! * 0.20,
+      height: _deviceHeight! * 0.19,
       child: Form(
         key: _loginFormKey,
         child: Column(
@@ -109,7 +109,7 @@ class _LoginPage extends State<LoginPage> {
 
   Widget _loginButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: _loginUser,
       minWidth: _deviceWidth! * 0.70,
       height: _deviceHeight! * 0.06,
       color: Colors.red,
@@ -122,5 +122,11 @@ class _LoginPage extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _loginUser() async {
+    if (_loginFormKey.currentState!.validate()) {
+      _loginFormKey.currentState!.save();
+    }
   }
 }
