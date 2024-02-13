@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_is_empty, depend_on_referenced_packages, unused_field
+// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_is_empty, depend_on_referenced_packages, unused_field, sized_box_for_whitespace
 
 import 'dart:io';
 import 'package:flutter/material.dart';

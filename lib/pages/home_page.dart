@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+
 import 'package:finstagram/pages/feed_page.dart';
 import 'package:finstagram/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _HomePageState();
