@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "499297724871",
+    "project_id": "finsta-gram",
+    "storage_bucket": "finsta-gram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499297724871:android:d7364bce8fe94e8d6c11e2",
+        "android_client_info": {
+          "package_name": "com.example.finstagram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtV0x4kclsSinYNeeyjWxcnGb1D_Exgtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
