@@ -1,6 +1,8 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, unused_field, sized_box_for_whitespace
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unused_field, sized_box_for_whitespace, use_build_context_synchronously
 
+import 'package:finstagram/services/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,10 +16,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
   double? _deviceHeight, _deviceWidth;
 
+  FirebaseService? _firebaseService;
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
 
   String? _email;
   String? _password;
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseService = GetIt.instance.get<FirebaseService>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +151,9 @@ class _LoginPage extends State<LoginPage> {
   void _loginUser() async {
     if (_loginFormKey.currentState!.validate()) {
       _loginFormKey.currentState!.save();
+      bool _result = await _firebaseService!
+          .loginUser(email: _email!, password: _password!);
+      if (_result) Navigator.popAndPushNamed(context, 'home');
     }
   }
 }

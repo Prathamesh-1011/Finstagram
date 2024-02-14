@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:finstagram/pages/home_page.dart';
 import 'package:finstagram/pages/login_page.dart';
 import 'package:finstagram/pages/register_page.dart';
@@ -8,7 +10,17 @@ import 'package:get_it/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+            apiKey: "AIzaSyCtV0x4kclsSinYNeeyjWxcnGb1D_Exgtk",
+            appId: "1:499297724871:android:d7364bce8fe94e8d6c11e2",
+            messagingSenderId: "499297724871",
+            projectId: "finsta-gram",
+          ),
+        )
+      : await Firebase.initializeApp();
   GetIt.instance.registerSingleton<FirebaseService>(
     FirebaseService(),
   );
@@ -26,7 +38,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         useMaterial3: true,
       ),
-      initialRoute: "home",
+      initialRoute: "login",
       routes: {
         "register": (context) => RegisterPage(),
         "login": (context) => LoginPage(),
