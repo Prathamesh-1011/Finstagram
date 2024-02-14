@@ -1,8 +1,13 @@
 // ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
 
+import 'dart:io';
+
 import 'package:finstagram/pages/feed_page.dart';
 import 'package:finstagram/pages/profile_page.dart';
+import 'package:finstagram/services/firebase_service.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:get_it/get_it.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,12 +19,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FirebaseService? _firebaseService;
+
   int _currentPage = 0;
 
   final List<Widget> _pages = [
     FeedPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseService = GetIt.instance.get<FirebaseService>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: _postImage,
             child: const Icon(
               Icons.add_a_photo,
               color: Colors.white,
@@ -92,5 +105,16 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+
+  void _postImage() async {
+    FilePickerResult? _result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+    if (_result != null && _result.files.isNotEmpty) {
+      File _image = File(_result.files.first.path!);
+      await _firebaseService!.postImage(_image);
+    } else {
+      print('No file selected');
+    }
   }
 }
