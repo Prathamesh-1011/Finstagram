@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -59,7 +59,10 @@ class _HomePageState extends State<HomePage> {
               right: 8.0,
             ),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                await _firebaseService!.logout();
+                Navigator.popAndPushNamed(context, 'login');
+              },
               child: const Icon(
                 Icons.logout,
                 color: Colors.white,
