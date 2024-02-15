@@ -95,4 +95,11 @@ class FirebaseService {
       return false;
     }
   }
+
+  Stream<QuerySnapshot> getLatestPosts() {
+    return _db
+        .collection(POSTS_COLLECTION)
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
 }
